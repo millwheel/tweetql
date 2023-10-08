@@ -1,5 +1,7 @@
 import { ApolloServer, gql } from "apollo-server";
 
+// right side of colon is type of data
+// "!" <= it means "non-nullable"
 const typeDefs = gql`
   type User {
     id: ID!
@@ -12,7 +14,6 @@ const typeDefs = gql`
   type Query {
     allTweets: [Tweet!]!
     tweet(id: ID!): Tweet
-    ping: String
   }
   type Mutation {
     postTweet(text: String!, userId: ID!): Tweet!
@@ -22,19 +23,19 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    allTweet(){
+    allTweets() {
       return tweets;
-    }
-    tweet() {
-      console.log("Called.");
-      return null;
     },
-    ping() {
-      return "pong";
+    // first argument should be root
+    // parameters always go into second argument of bracket
+    tweet(root, args) {
+      const { id } = args;
+      return tweets.find((tweet) => tweet.id === id);
     },
   },
 };
 
+// temporary database
 const tweets = [
   {
     id: "1",
