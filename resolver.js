@@ -40,6 +40,12 @@ const resolvers = {
       return `${firstName} ${lastName}`;
     },
   },
+  Tweet: {
+    author(root) {
+      const { userId } = root;
+      return users.find((user) => user.id === userId);
+    },
+  },
 };
 
 export default resolvers;

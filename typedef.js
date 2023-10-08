@@ -14,6 +14,7 @@ const typeDefs = gql`
   type Tweet {
     id: ID!
     text: String!
+    author: User!
   }
   type Query {
     allUsers: [User!]!
