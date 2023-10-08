@@ -19,9 +19,13 @@ const resolvers = {
   Mutation: {
     postTweet(root, args) {
       const { text, userId } = args;
+      if (!users.find((user) => user.id === userId)) {
+        throw new Error("User doesn't exist.");
+      }
       const newTweet = {
         id: tweets.length + 1,
         text,
+        userId,
       };
       tweets.push(newTweet);
       return newTweet;
