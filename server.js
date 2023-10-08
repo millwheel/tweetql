@@ -1,4 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
+import users from "./userdb.js";
+import tweets from "./tweetdb.js";
 
 // right side of colon is type of data
 // "!" <= it means "non-nullable"
@@ -64,31 +66,6 @@ const resolvers = {
     },
   },
 };
-
-// temporary database
-let tweets = [
-  {
-    id: "1",
-    text: "First one",
-  },
-  {
-    id: "2",
-    text: "Second one",
-  },
-];
-
-let users = [
-  {
-    id: "1",
-    firstName: "nico",
-    lastName: "asme",
-  },
-  {
-    id: "2",
-    firstName: "eson",
-    lastName: "lock",
-  },
-];
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
